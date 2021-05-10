@@ -1,13 +1,38 @@
 {
+  // Options Pulled From: https://tsoa-community.github.io/docs/getting-started.html#defining-our-first-model
   "compilerOptions": {
-    "lib": ["es5", "es6"],
-    "target": "es5",
+    /* Basic Options */
+    "incremental": true,
+    "target": "es6",
     "module": "commonjs",
+    "outDir": "build",
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Module Resolution Options */
     "moduleResolution": "node",
-    "outDir": "./build",
-    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+
+    /* Experimental Options */
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "esModuleInterop": true
+    "emitDecoratorMetadata": true,
+
+    /* Advanced Options */
+    "forceConsistentCasingInFileNames": true
   }
 }

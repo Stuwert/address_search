@@ -3,20 +3,20 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 @Entity()
 export class StreetAddress extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  lineOne: string;
+  lineOne!: string;
 
-  @Column()
+  @Column({ nullable: true })
   lineTwo?: string;
 
   @Column()
-  city: string;
+  city!: string;
 
   @Column()
-  state: string;
+  state!: string;
 
   @Column()
-  zip: string;
+  zip!: string;
 }

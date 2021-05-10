@@ -4,8 +4,9 @@
   "description": "Takehome exam for Lob interview",
   "main": "index.ts",
   "scripts": {
+    "build": "tsoa spec-and-routes && tsc",
     "test": "test",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node src/server.ts",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "keywords": [
@@ -17,16 +18,21 @@
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.11",
-    "@types/node": "^8.10.66",
-    "ts-node": "^3.3.0",
-    "typescript": "^3.3.3333"
+    "@types/node": "^15.0.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "mysql": "^2.14.1",
-    "reflect-metadata": "^0.1.10",
+    "fishery": "^1.2.0",
+    "pg": "^8.6.0",
+    "reflect-metadata": "^0.1.13",
     "tsoa": "^3.7.0",
-    "typeorm": "0.2.32"
+    "typeorm": "^0.2.32"
+  },
+  "engines": {
+    "node": "14.16.0",
+    "npm": "7.12.0"
   }
 }

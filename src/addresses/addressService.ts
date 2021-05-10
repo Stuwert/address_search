@@ -1,4 +1,4 @@
-import { StreetAddress } from "../entity/Address";
+import { StreetAddress } from "../entity/StreetAddress";
 
 export type AddressCreationParams = Omit<StreetAddress, "id">;
 
@@ -69,6 +69,9 @@ export async function remove(id: number): Promise<number> {
  * 3400 N. Charles St., Baltimore
  * Baltimore
  *
+ * My design assumption here is that the front end is going to give us a string
+ * and then the backend should do some work to parse it and make the correct search
+ * assumptions that
  *
  * Depending how often this happened you could do some validation up front to
  * make sure that you were only querying for the items that you wanted.
@@ -97,7 +100,9 @@ export async function remove(id: number): Promise<number> {
  */
 
 export async function query(parameter: string): Promise<StreetAddress[]> {
-  const addresses = await StreetAddress.createQueryBuilder().where(
-    "lineOne like "
-  );
+  const addresses = await StreetAddress.createQueryBuilder()
+    .where("lineOne like %:parameter%", { parameter })
+    .getMany();
+
+  return addresses;
 }

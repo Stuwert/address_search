@@ -4,12 +4,12 @@ import {
   Get,
   Path,
   Post,
-  Query,
+  // Query,
   Route,
   SuccessResponse,
 } from "tsoa";
 
-import { StreetAddress } from "../entity/Address";
+import { StreetAddress } from "../entity/StreetAddress";
 import { AddressCreationParams, create, get } from "./addressService";
 
 @Route("addresses")
