@@ -89,7 +89,7 @@ export async function remove(id: number): Promise<StreetAddress> {
  * @returns
  */
 
-function parseParameterForComponents(
+function parseParameterForSearchComponents(
   parameters: string
 ): Partial<AddressCreationParams> {
   const [firstPart, city, stateZip] = parameters.split(",");
@@ -207,9 +207,13 @@ function parseParameterForComponents(
  * @param parameter
  */
 export async function query(parameters: string): Promise<StreetAddress[]> {
-  const { lineOne, lineTwo, city, state, zip } = parseParameterForComponents(
-    parameters
-  );
+  const {
+    lineOne,
+    lineTwo,
+    city,
+    state,
+    zip,
+  } = parseParameterForSearchComponents(parameters);
 
   try {
     const addressQb = StreetAddress.createQueryBuilder("sa");
