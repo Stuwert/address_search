@@ -8,7 +8,7 @@ export default async function seedStreetAddresses(
   console.log("Cleaning Addresses");
   await connection.query(`
     TRUNCATE street_addresses;
-    ALTER SEQUENCE street_address_id_seq RESTART WITH 1
+    ALTER SEQUENCE street_addresses_id_seq RESTART WITH 1
 
   `);
 

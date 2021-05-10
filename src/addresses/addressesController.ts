@@ -6,6 +6,7 @@ import {
   Path,
   Post,
   Put,
+  Query,
   // Query,
   Route,
   SuccessResponse,
@@ -16,6 +17,7 @@ import {
   AddressCreationParams,
   create,
   get,
+  query,
   remove,
   update,
 } from "./addressService";
@@ -49,5 +51,13 @@ export class AddressesController extends Controller {
     @Body() requestBody: AddressCreationParams
   ): Promise<StreetAddress> {
     return update(addressId, requestBody);
+  }
+
+  @Get()
+  public async queryAddresses(
+    @Query() search: string
+  ): Promise<StreetAddress[]> {
+    console.log(search);
+    return query(search);
   }
 }
