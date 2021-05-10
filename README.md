@@ -4,7 +4,7 @@ The goal of this project is to create a demo environment for CRUD and "fuzzy" se
 
 ## Setup
 
-This presumes you've already installed postgres on your local machine and have access to that environment and also have the latest version of node and npm
+This presumes you've already installed postgres on your local machine and have access to that environment and also have the latest versions of node and npm
 
 1. Create a new postgres database (version 13) named `address_app`.
 
