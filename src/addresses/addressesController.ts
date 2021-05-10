@@ -1,16 +1,24 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Path,
   Post,
+  Put,
   // Query,
   Route,
   SuccessResponse,
 } from "tsoa";
 
 import { StreetAddress } from "../entity/StreetAddress";
-import { AddressCreationParams, create, get } from "./addressService";
+import {
+  AddressCreationParams,
+  create,
+  get,
+  remove,
+  update,
+} from "./addressService";
 
 @Route("addresses")
 export class AddressesController extends Controller {
@@ -26,5 +34,20 @@ export class AddressesController extends Controller {
   ): Promise<StreetAddress> {
     this.setStatus(201);
     return create(requestBody);
+  }
+
+  @Delete("{addressId}")
+  public async deleteAddress(
+    @Path() addressId: number
+  ): Promise<StreetAddress> {
+    return remove(addressId);
+  }
+
+  @Put("{addressId}")
+  public async updateAddress(
+    @Path() addressId: number,
+    @Body() requestBody: AddressCreationParams
+  ): Promise<StreetAddress> {
+    return update(addressId, requestBody);
   }
 }

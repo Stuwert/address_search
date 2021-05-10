@@ -1,6 +1,10 @@
+import { BaseEntity } from "typeorm";
 import { StreetAddress } from "../entity/StreetAddress";
 
-export type AddressCreationParams = Omit<StreetAddress, "id">;
+export type AddressCreationParams = Omit<
+  StreetAddress,
+  keyof BaseEntity | "id"
+>;
 
 export async function get(id: number): Promise<StreetAddress> {
   return StreetAddress.findOneOrFail(id);
@@ -11,7 +15,7 @@ export async function create(
 ): Promise<StreetAddress> {
   // Do some data validation.
 
-  return StreetAddress.create(addressCreationParams);
+  return StreetAddress.create(addressCreationParams).save();
 }
 
 export async function update(
@@ -50,12 +54,12 @@ export async function update(
   return address;
 }
 
-export async function remove(id: number): Promise<number> {
+export async function remove(id: number): Promise<StreetAddress> {
   const address = await StreetAddress.findOneOrFail(id);
 
   await address.remove();
 
-  return id;
+  return address;
 }
 
 /**

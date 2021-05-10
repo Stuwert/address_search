@@ -1,8 +1,13 @@
 import "reflect-metadata";
 import bodyParser from "body-parser";
-import express from "express";
+import express, {
+  Response as ExResponse,
+  Request as ExRequest,
+  NextFunction,
+} from "express";
 // import { createConnection } from "typeorm";
 import { RegisterRoutes } from "../build/routes";
+import { ValidateError } from "@tsoa/runtime";
 
 export const app = express();
 
@@ -16,20 +21,25 @@ app.use(bodyParser.json());
 
 RegisterRoutes(app);
 
-// createConnection()
-//   .then(async (connection) => {
-//     console.log("Inserting a new address into the database...");
-//     const address = new StreetAddress();
-//     address.firstName = "Timber";
-//     address.lastName = "Saw";
-//     address.age = 25;
-//     await connection.manager.save(address);
-//     console.log("Saved a new address with id: " + address.id);
+// Implemented From: https://tsoa-community.github.io/docs/error-handling.html#setting-up-error-handling
+app.use(function errorHandler(
+  err: unknown,
+  req: ExRequest,
+  res: ExResponse,
+  next: NextFunction
+): ExResponse | void {
+  if (err instanceof ValidateError) {
+    console.warn(`Caught Validation Error for ${req.path}:`, err.fields);
+    return res.status(422).json({
+      message: "Validation Failed",
+      details: err?.fields,
+    });
+  }
+  if (err instanceof Error) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
 
-//     console.log("Loading users from the database...");
-//     const users = await connection.manager.find(StreetAddress);
-//     console.log("Loaded users: ", users);
-
-//     console.log("Here you can setup and run express/koa/any other framework.");
-//   })
-//   .catch((error) => console.log(error));
+  next();
+});
