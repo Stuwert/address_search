@@ -1,56 +1,36 @@
-# Awesome Project Build with TypeORM
+# Address Search
 
-Steps to run this project:
-
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+The goal of this project is to create a demo environment for CRUD and "fuzzy" search on addresses with TypeORM and TSOA.
 
 ## Setup
 
-This presumes you've already installed postgres on your local machine and have access to that environment. If you have not, feel free to find instructions here:
+This presumes you've already installed postgres on your local machine and have access to that environment and also have the latest version of node and npm
 
-- [Windows]
-- [Mac]
-- [Linux]
-
-First create the database
+1. Create a new postgres database (version 13) named `address_app`.
 
 ```
-createdb lob
-```
-
-then connect to the database
-
-```
+// Create the database
+createdb address_search
+// Connect
 psql
+// Create the user
+CREATE role address WITH LOGIN ENCRYPTED PASSWORD 'address';
 ```
 
-then create the associated user that should allow you to connect:
-
-```
-CREATE role lob_app WITH LOGIN ENCRYPTED PASSWORD 'lob';
-```
-
-then create a user with the associated
-
-1. Create a new postgres database (version 13) named lob.
 2. Run `npm install`
 3. Run `npm run migrate` to create the database.
 4. Run `npm run seed` to seed the examples into the database
-5. Run `npm start` to start the server.
-
-## LOB
+5. Run `npm run build` to compile Typescript and generate the TSOA routes.
+6. Run `npm start` to start the server.
 
 ## Some Notes
 
-Given the constraints of the challenge (doing this quickly for an interview) I decided to default to quick implementations like TypeORM, Factories, and TSOA to quickly spin up the associated environment. I also didn't implement anything that would be expected to be added in an existing system like Authentication or Environment Variable management. I presumed these would already exist in the API where I was making the changes or would have been an explicit part of the requirements otherwise.
+Given how quickly I tried to spin this up I defaulted to quick implementations like TypeORM, Factories, and TSOA. I also didn't implement anything that would be expected to be added in an existing system like Authentication or Environment Variable management. I presumed these would already exist in a theoretical API.
 
 Some of this might look like it was taken from set-up docs related to TSOA. They are. If I were to start an express project from scratch today I'd use TSOA and TypeORM as my baseline, so I went forward with that. Given the simplicity of the set-up this will look pretty similar to the defaults
 
 ## Future Directions for Development
 
-Given the constraints of the time I decided not to focus much on things like performance, but other directions to grow include:
-
-- Adding elastic search so search results return quicker
+- Adding elastic search so search results return quicker (a bunch of ors and likes isn't great for large performance)
 - Set up environment variables instead of hardcoding things around.
+- Add functional tests

@@ -57,7 +57,6 @@ export class AddressesController extends Controller {
   public async queryAddresses(
     @Query() search: string
   ): Promise<StreetAddress[]> {
-    console.log(search);
     return query(search);
   }
 }

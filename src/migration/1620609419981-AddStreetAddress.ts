@@ -10,6 +10,6 @@ export class AddStreetAddress1620609419981 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`DROP TABLE "street_address"`);
+    await queryRunner.query(`DROP TABLE "street_addresses"`);
   }
 }
